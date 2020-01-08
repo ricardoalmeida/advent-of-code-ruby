@@ -7,30 +7,38 @@ class Day02
     {1 => :+, 2 => :*, 99 => "ok"}
   end
 
+  def reset(input)
+    input[1] = 12
+    input[2] = 2
+  end
+
+  def unknown(value, index)
+    raise "Something went wrong, value: #{value}, index: #{index}"
+  end
+
+  def calc(op1, op2, action)
+    op1.send(action, op2)
+  end
+
   def part01(input: file_input)
     result = nil
-    finish = input.size - 1
-    (0..finish).step(4) do |i|
-      value, pos1, pos2, replace = input[i..i+3]
+    (0..input.size - 1).step(4) do |i|
+      value, pos1, pos2, replace = input[i..i + 3]
       action = opcodes[value]
 
-      break if action == "ok"
-      raise "Something went wrong, value: #{value}, index: #{i}" if action == nil
+      break result if action == "ok"
+      unknown(value, i) if action.nil?
 
-      op1 = input[pos1]
-      op2 = input[pos2]
-
-      result = op1.send(action, op2)
+      result = calc(input[pos1], input[pos2], action)
       input[replace] = result
-      input[1] = 12
-      input[2] = 2
+      reset(input)
     end
-    result
   end
 end
 
 RSpec.describe Day02 do
   it "part 1" do
+    expect{ subject.part01(input: [1,0,0,0,9]) }.to raise_error /Something went wrong/
     expect(subject.part01(input: [1,0,0,0,99])).to eq(2)
     expect(subject.part01(input: [2,3,0,3,99])).to eq(6)
     expect(subject.part01(input: [2,4,4,5,99,0])).to eq(9801)
