@@ -12,11 +12,11 @@ def calc_fuel_plus_mass(mass)
 end
 
 def part01(input: spacial_modules)
-  input.map{|m| calc_fuel(m) }.reduce(:+)
+  input.map{|m| calc_fuel(m) }.sum
 end
 
 def part02(input: spacial_modules)
-  input.map{|m| calc_fuel_plus_mass(m) }.reduce(:+)
+  input.map{|m| calc_fuel_plus_mass(m) }.sum
 end
 
 RSpec.describe "day 01" do
