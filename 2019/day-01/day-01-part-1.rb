@@ -7,10 +7,8 @@ def calc_fuel(mass)
 end
 
 def calc_fuel_plus_mass(mass)
-  if (fuel = calc_fuel(mass)) >= 0
-    return fuel + calc_fuel_plus_mass(fuel)
-  end
-  0
+  return 0 if (fuel = calc_fuel(mass)) <= 0
+  fuel + calc_fuel_plus_mass(fuel)
 end
 
 def part01(input: spacial_modules)
