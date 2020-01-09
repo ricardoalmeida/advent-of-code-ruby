@@ -12,8 +12,8 @@ class Day02
     input[2] = 2
   end
 
-  def unknown(value, index)
-    raise "Something went wrong, value: #{value}, index: #{index}"
+  def unknown(instruction, index)
+    raise "Something went wrong, instruction: #{instruction}, index: #{index}"
   end
 
   def calc(op1, op2, action)
@@ -23,11 +23,11 @@ class Day02
   def part01(input: file_input)
     result = nil
     (0..input.size - 1).step(4) do |i|
-      value, pos1, pos2, replace = input[i..i + 3]
-      action = opcodes[value]
+      instruction, pos1, pos2, replace = input[i..i + 3]
+      action = opcodes[instruction]
 
       break result if action == "ok"
-      unknown(value, i) if action.nil?
+      unknown(instruction, i) if action.nil?
 
       result = calc(input[pos1], input[pos2], action)
       input[replace] = result

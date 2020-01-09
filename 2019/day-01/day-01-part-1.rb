@@ -13,23 +13,27 @@ class Day01
   end
 
   def part01(input: file_input)
-    input.map{|m| calc_fuel(m) }.sum
+    Array(input).map{|m| calc_fuel(m) }.sum
   end
 
   def part02(input: file_input)
-    input.map{|m| calc_fuel_plus_mass(m) }.sum
+    Array(input).map{|m| calc_fuel_plus_mass(m) }.sum
   end
 end
 
 RSpec.describe Day01 do
   it "part 1" do
+    expect(subject.part01(input: 12)).to eq(2)
+    expect(subject.part01(input: 14)).to eq(2)
+    expect(subject.part01(input: 1969)).to eq(654)
+    expect(subject.part01(input: 100756)).to eq(33583)
     expect(subject.part01).to eq(3297626)
   end
 
   it "part 2" do
-    expect(subject.part02(input: [14])).to eq(2)
-    expect(subject.part02(input: [1969])).to eq(966)
-    expect(subject.part02(input: [100756])).to eq(50346)
+    expect(subject.part02(input: 14)).to eq(2)
+    expect(subject.part02(input: 1969)).to eq(966)
+    expect(subject.part02(input: 100756)).to eq(50346)
     expect(subject.part02).to eq(4943578)
   end
 end
