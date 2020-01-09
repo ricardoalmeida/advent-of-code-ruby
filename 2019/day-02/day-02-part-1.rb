@@ -4,7 +4,7 @@ class Day02
   end
 
   def opcodes
-    {1 => :+, 2 => :*, 99 => "ok"}
+    {1 => :+, 2 => :*, 99 => "finished"}
   end
 
   def reset(input)
@@ -26,7 +26,7 @@ class Day02
       instruction, pos1, pos2, replace = input[i..i + 3]
       action = opcodes[instruction]
 
-      break result if action == "ok"
+      break result if action == "finished"
       unknown(instruction, i) if action.nil?
 
       result = calc(input[pos1], input[pos2], action)
